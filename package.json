@@ -32,14 +32,14 @@
     "typescript": "^4.0.0"
   },
   "dependencies": {
-    "@civ-clone/base-difficulty": "github:civ-clone/base-difficulty#feat/human-and-level",
+    "@civ-clone/base-difficulty": "^0.1.0",
     "@civ-clone/base-difficulty-chieftain": "^0.1.0",
     "@civ-clone/base-difficulty-deity": "^0.1.0",
     "@civ-clone/base-difficulty-emperor": "^0.1.0",
     "@civ-clone/base-difficulty-king": "^0.1.0",
     "@civ-clone/base-difficulty-prince": "^0.1.0",
     "@civ-clone/base-difficulty-warlord": "^0.1.0",
-    "@civ-clone/civ2-rules": "github:civ-clone/civ2-rules#feat/cosmic",
+    "@civ-clone/civ2-rules": "github:civ-clone/civ2-rules",
     "@civ-clone/core-city": "^0.1.24",
     "@civ-clone/core-city-build": "^0.1.22",
     "@civ-clone/core-client": "^0.1.4",
