@@ -8,7 +8,7 @@ from OpenCiv2's reconstruction of the original.
 - `levelOf(game.difficulty)`: the level, 0 to 5. A game with no level set plays at King.
 - `isHuman(player, game.clients)`: whether a person plays `player` (from `base-difficulty`).
 - `foodBoxRows(level, human)` and `shieldRows(level, human)`: the rows of a city's food and shield boxes. The human
-  has @COSMIC's 10; the computer players have 15, 13, 12, 10, 9 and 8 (`city.cpp:8817`, `:8885`).
+  has @COSMIC's 10; the computer players have 15, 13, 12, 10, 9 and 8 (OpenCiv2 `city_calc_food_box_rows`, `city_calc_unit_support`, richardpenman/civ2@49f26ec).
 
 The rule here makes the computer players pay `shieldRows / 10` of every build cost. The food box rows are for the city
 package's growth rule.

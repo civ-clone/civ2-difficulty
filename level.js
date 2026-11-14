@@ -13,7 +13,7 @@ const cosmic_1 = require("@civ-clone/civ2-rules/data/cosmic");
 const levelOf = (gameDifficultyRegistry) => (0, level_1.default)(gameDifficultyRegistry, Difficulties_1.King);
 exports.levelOf = levelOf;
 // A computer player's rows, scaled when @COSMIC's rows aren't 10, and then made even, as the game does (OpenCiv2
-//  `src/auto/city.cpp:8859-8862` and `:8913-8916`).
+//  `src/auto/city.cpp` `city_calc_food_box_rows` and `city_calc_unit_support`, richardpenman/civ2@49f26ec).
 const scaled = (rows, cosmicRows) => {
     if (cosmicRows === 10) {
         return rows;
@@ -23,7 +23,7 @@ const scaled = (rows, cosmicRows) => {
 };
 /**
  * How many rows a city's food box has, which its size + 1 multiplies to give the food it needs to grow (OpenCiv2
- * `src/auto/city.cpp` `city_calc_food_box_rows`, :8817): @COSMIC's 10 for the human, and for the computer players
+ * `src/auto/city.cpp` `city_calc_food_box_rows`, richardpenman/civ2@49f26ec): @COSMIC's 10 for the human, and for the computer players
  * 13 − level, 1 more below King and 1 more again on Chieftain: 15, 13, 12, 10, 9 and 8.
  *
  * After turn 200, above Warlord, the game takes up to 2 more rows off the computer players while a human leads the
@@ -46,7 +46,7 @@ const foodBoxRows = (level, human) => {
 exports.foodBoxRows = foodBoxRows;
 /**
  * How many rows a city's shield box has, which multiplies every build cost (OpenCiv2 `src/auto/city.cpp`
- * `city_calc_unit_support`, :8885): @COSMIC's 10 for the human, and for the computer players 13 − level, 14 on
+ * `city_calc_unit_support`, richardpenman/civ2@49f26ec): @COSMIC's 10 for the human, and for the computer players 13 − level, 14 on
  * Chieftain, and 1 more below King: 15, 13, 12, 10, 9 and 8. The late-game rows taken off are left out, as for
  * `foodBoxRows` (here from turn 200).
  */

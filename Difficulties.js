@@ -2,7 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Deity = exports.Emperor = exports.King = exports.Prince = exports.Warlord = exports.Chieftain = void 0;
 // Civilization II's six levels, from `base-difficulty-*`. `level()` is the game's difficulty, 0 (Chieftain) to 5
-//  (Deity), which every formula that depends on the level reads (OpenCiv2 `src/include/enums.h:182`).
+//  (Deity), which every formula that depends on the level reads (OpenCiv2 `src/include/enums.h` `DIFF_*`,
+//  richardpenman/civ2@49f26ec).
 var Chieftain_1 = require("@civ-clone/base-difficulty-chieftain/Chieftain");
 Object.defineProperty(exports, "Chieftain", { enumerable: true, get: function () { return Chieftain_1.Chieftain; } });
 var Warlord_1 = require("@civ-clone/base-difficulty-warlord/Warlord");
