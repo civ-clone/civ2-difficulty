@@ -13,5 +13,9 @@ from OpenCiv2's reconstruction of the original.
 The rule here makes the computer players pay `shieldRows / 10` of every build cost. The food box rows are for the city
 package's growth rule.
 
+The combat handicaps (`unit_resolve_attack`), for any attacker that isn't a barbarian, are the rule set
+`civ2-difficulty:combat-handicaps`, so a game can switch them off: below Prince, an attack on a human's unit is
+halved; on Chieftain, a human's attack is doubled.
+
 Not yet here: after turn 200, above Warlord, Civ2 takes up to 2 more rows off the computer players while a human leads
 the power ranking. That needs Civ2's advances and wonders (the Manhattan Project, the Apollo Program).
