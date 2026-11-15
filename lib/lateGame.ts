@@ -75,8 +75,8 @@ const nobody: Known = { human: false, computer: false };
  * extension makes it true whenever civilization 7 knows the advance, human or not. Players here have no slot numbers,
  * so that isn't followed.
  *
- * Before turn 200 (`SHIELD_ROWS_UNTIL` + 1), and at Chieftain and Warlord, nothing takes rows off, so it reads nothing
- * and answers that no human leads.
+ * Before turn 200 (`SHIELD_ROWS_UNTIL` + 1), at Chieftain and Warlord, and while no human leads, nothing takes rows off,
+ * so it reads no Wonders or advances (nor, for the first two, the ranking) and answers that no human leads.
  */
 export const lateGame = ({
   cityImprovementRegistry = cityImprovementRegistryInstance,
@@ -133,9 +133,11 @@ export const lateGame = ({
   return (): LateGame => {
     const currentTurn = turn.value();
 
+    // The code tests the turn, the level and the leader first (one `&&`), so the rest is read only when all three hold.
     if (
       currentTurn <= SHIELD_ROWS_UNTIL ||
-      levelOf(gameDifficultyRegistry) <= Warlord.level()
+      levelOf(gameDifficultyRegistry) <= Warlord.level() ||
+      !leaderIsHuman(currentTurn)
     ) {
       return {
         turn: currentTurn,
@@ -150,7 +152,7 @@ export const lateGame = ({
 
     return {
       turn: currentTurn,
-      humanLeads: leaderIsHuman(currentTurn),
+      humanLeads: true,
       manhattanProject: everBuilt(
         ManhattanProject,
         wonderRegistry,

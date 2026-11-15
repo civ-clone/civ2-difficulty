@@ -35,8 +35,8 @@ export interface LateGameDependencies {
  * extension makes it true whenever civilization 7 knows the advance, human or not. Players here have no slot numbers,
  * so that isn't followed.
  *
- * Before turn 200 (`SHIELD_ROWS_UNTIL` + 1), and at Chieftain and Warlord, nothing takes rows off, so it reads nothing
- * and answers that no human leads.
+ * Before turn 200 (`SHIELD_ROWS_UNTIL` + 1), at Chieftain and Warlord, and while no human leads, nothing takes rows off,
+ * so it reads no Wonders or advances (nor, for the first two, the ranking) and answers that no human leads.
  */
 export declare const lateGame: ({
   cityImprovementRegistry,

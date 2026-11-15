@@ -315,6 +315,17 @@ describe('lateGame', (): void => {
     });
   });
 
+  it('reads no Wonders or advances while a computer player leads', (): void => {
+    const { computer, read, scores, turn, wonders } = setUp();
+
+    turn.set(250);
+    scores.set(computer.player, 10);
+    wonders.push(Object.create(ManhattanProject.prototype));
+    computer.research.addAdvance(Rocketry);
+
+    expect(read()).eql(late(250, { humanLeads: false }));
+  });
+
   it("take shield rows off a computer player's build costs from turn 200", (): void => {
     const ruleRegistry = new RuleRegistry(),
       clientRegistry = new ClientRegistry(),
