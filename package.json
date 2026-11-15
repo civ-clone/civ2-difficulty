@@ -21,7 +21,6 @@
   "devDependencies": {
     "@civ-clone/civ2-asset-extractor": "github:civ-clone/civ2-asset-extractor",
     "@civ-clone/core-ai-client": "^0.1.3",
-    "@civ-clone/core-player": "^0.1.10",
     "@types/chai": "^4.0.0",
     "@types/mocha": "^10.0.0",
     "@types/node": "^16.0.0",
@@ -40,13 +39,25 @@
     "@civ-clone/base-difficulty-king": "^0.1.0",
     "@civ-clone/base-difficulty-prince": "^0.1.0",
     "@civ-clone/base-difficulty-warlord": "^0.1.0",
+    "@civ-clone/base-science-advance-nuclearfission": "^0.1.0",
+    "@civ-clone/base-science-advance-rocketry": "^0.1.0",
+    "@civ-clone/base-science-advance-spaceflight": "^0.1.0",
+    "@civ-clone/base-wonder": "^0.1.1",
+    "@civ-clone/base-wonder-apolloprogram": "^0.1.1",
+    "@civ-clone/base-wonder-manhattanproject": "^0.1.1",
     "@civ-clone/civ2-rules": "github:civ-clone/civ2-rules",
     "@civ-clone/core-city": "^0.1.24",
     "@civ-clone/core-city-build": "^0.1.22",
+    "@civ-clone/core-city-improvement": "^0.1.8",
     "@civ-clone/core-client": "^0.1.4",
     "@civ-clone/core-difficulty": "^0.1.0",
     "@civ-clone/core-game": "^0.1.17",
+    "@civ-clone/core-player": "^0.1.10",
+    "@civ-clone/core-power": "^0.1.0",
     "@civ-clone/core-rule": "^0.1.9",
-    "@civ-clone/core-unit": "^0.1.32"
+    "@civ-clone/core-science": "^0.1.9",
+    "@civ-clone/core-turn-based-game": "^0.1.10",
+    "@civ-clone/core-unit": "^0.1.32",
+    "@civ-clone/core-wonder": "^0.1.5"
   }
 }
