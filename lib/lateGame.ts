@@ -57,6 +57,13 @@ export interface LateGameDependencies {
 
 const nobody: Known = { human: false, computer: false };
 
+// The turn's ranking, per game (its `PlayerRegistry`), shared by every reader: the food rows (civ2-city) and the shield
+//  rows (`Rules/City/build-cost`) read the same leader each turn, as Civ2's ranking is taken once, at the turn's start.
+const rankedLeaders = new WeakMap<
+  PlayerRegistry,
+  { turn: number; humanLeads: boolean }
+>();
+
 /**
  * A reader of what the computer players' late-game rows depend on (`LateGame`, for `foodBoxRows` and `shieldRows`), as
  * a game stands when it's called:
@@ -65,7 +72,8 @@ const nobody: Known = { human: false, computer: false };
  * - whether a human leads the power ranking: core-power's `rankings` of the players who aren't the barbarians (Civ2
  *   ranks civilizations 1 to 7, never the barbarians' 0), by the game's `Rank` rules (civ2-power's: advances × 3 +
  *   citizens × 8 + gold / 32, `civ.cpp` `civ_update_power_ranks`), a tie going to the player registered first. Civ2
- *   ranks once a turn, as the turn begins; this ranks once a turn too, the first time it's asked that turn;
+ *   ranks once a turn, as the turn begins; this ranks once a turn too, the first time any reader of the game asks
+ *   that turn, and every reader of the game is given the same answer that turn;
  * - whether the Manhattan Project and the Apollo Program have ever been built, standing or lost (base-wonder's
  *   `everBuilt`: Civ2 asks `wonder_city != -1`, and a lost Wonder is -2);
  * - whether a human, and whether a computer player (the barbarians included), knows Rocketry, Nuclear Fission and
@@ -88,21 +96,22 @@ export const lateGame = ({
   turn = turnInstance,
   wonderRegistry = wonderRegistryInstance,
 }: LateGameDependencies = {}): (() => LateGame) => {
-  let rankedTurn: number | null = null,
-    humanLeads = false;
-
   const leaderIsHuman = (currentTurn: number): boolean => {
-      if (rankedTurn !== currentTurn) {
-        const [leader] = rankings(
+      const ranked = rankedLeaders.get(playerRegistry);
+
+      if (ranked !== undefined && ranked.turn === currentTurn) {
+        return ranked.humanLeads;
+      }
+
+      const [leader] = rankings(
           playerRegistry.filter(
             (player: Player): boolean => !isBarbarian(player)
           ),
           ruleRegistry
-        );
-
+        ),
         humanLeads = leader !== undefined && isHuman(leader, clientRegistry);
-        rankedTurn = currentTurn;
-      }
+
+      rankedLeaders.set(playerRegistry, { turn: currentTurn, humanLeads });
 
       return humanLeads;
     },

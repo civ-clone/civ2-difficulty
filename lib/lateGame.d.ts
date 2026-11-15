@@ -25,7 +25,8 @@ export interface LateGameDependencies {
  * - whether a human leads the power ranking: core-power's `rankings` of the players who aren't the barbarians (Civ2
  *   ranks civilizations 1 to 7, never the barbarians' 0), by the game's `Rank` rules (civ2-power's: advances × 3 +
  *   citizens × 8 + gold / 32, `civ.cpp` `civ_update_power_ranks`), a tie going to the player registered first. Civ2
- *   ranks once a turn, as the turn begins; this ranks once a turn too, the first time it's asked that turn;
+ *   ranks once a turn, as the turn begins; this ranks once a turn too, the first time any reader of the game asks
+ *   that turn, and every reader of the game is given the same answer that turn;
  * - whether the Manhattan Project and the Apollo Program have ever been built, standing or lost (base-wonder's
  *   `everBuilt`: Civ2 asks `wonder_city != -1`, and a lost Wonder is -2);
  * - whether a human, and whether a computer player (the barbarians included), knows Rocketry, Nuclear Fission and

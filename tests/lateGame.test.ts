@@ -237,12 +237,25 @@ describe('lateGame', (): void => {
       wonderRegistry,
     });
 
+    // A second reader of the same game, as civ2-city's food rows are beside the shield rows here.
+    const other = lateGame({
+      cityImprovementRegistry,
+      clientRegistry,
+      gameDifficultyRegistry,
+      playerRegistry,
+      playerResearchRegistry,
+      ruleRegistry,
+      turn,
+      wonderRegistry,
+    });
+
     return {
       clientRegistry,
       computer,
       gameDifficultyRegistry,
       human,
       lost,
+      other,
       read,
       ruleRegistry,
       scores,
@@ -290,6 +303,25 @@ describe('lateGame', (): void => {
     turn.set(252);
 
     expect(read().humanLeads).true;
+  });
+
+  it('gives every reader of a game the same leader for the turn, whichever asks first', (): void => {
+    const { computer, human, other, read, scores, turn } = setUp();
+
+    turn.set(260);
+    scores.set(human.player, 10);
+
+    expect(read().humanLeads).true;
+
+    // The computer player overtakes during the turn: the food rows, read later, still see the turn's leader.
+    scores.set(computer.player, 20);
+
+    expect(other().humanLeads).true;
+
+    turn.set(261);
+
+    expect(other().humanLeads).false;
+    expect(read().humanLeads).false;
   });
 
   it('reads the Wonders ever built, standing or lost, and who knows the advances', (): void => {
