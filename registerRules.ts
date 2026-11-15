@@ -9,7 +9,14 @@ import buildCost from './Rules/City/build-cost';
 
 export const register = (game: Game): void => {
   game.rules.register(
-    ...buildCost(game.difficulty, game.clients),
+    ...buildCost(game.difficulty, game.clients, {
+      cityImprovementRegistry: game.cityImprovements,
+      playerRegistry: game.players,
+      playerResearchRegistry: game.playerResearch,
+      ruleRegistry: game.rules,
+      turn: game.turn,
+      wonderRegistry: game.wonders,
+    }),
     ...unitStrength(game.difficulty, game.clients)
   );
 
